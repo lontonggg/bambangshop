@@ -58,12 +58,12 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement delete function in Subscriber repository.`
     -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -76,7 +76,7 @@ This is the place for you to write reflections:
 
 ### Mandatory (Publisher) Reflections
 
-#### Reflection Publisher-1
+### Reflection Publisher-1
 
 <b>1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?</b>
 
@@ -90,7 +90,18 @@ Untuk kasus ini, penggunaan DashMap adalah opsi yang lebih baik dibandingkan men
 
 Pada Rust, penggunaan DashMap mempermudah untuk membuat aplikasi yang thread-safe dan terhindar dari pelanggaran compiler constraints karena DashMap merupakan sebuah struktur data mirip dengan HashMap yang thread-safe dan memperbolehkan multiple thread untuk mengakses dan mengubah datanya tanpa menyebabkan data race atau isu concurrency lainnya. Karena BambangShop merupakan aplikasi yang multi-threaded, maka penggunaan DashMap lebih tepat dibandingkan Singleton pattern.
 
+### Reflection Publisher-2
 
-#### Reflection Publisher-2
+<b>In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?</b>
 
-#### Reflection Publisher-3
+Alasan mengapa Model perlu dipisah dengan Service dan Repository adalah untuk menjaga agar kode tetap terorganisir dan mudah dimaintain. Karena Service dan Repository memiliki responsibility yang berbeda, maka prinsip Single Responsibility Principle (SRP) perlu diterapkan untuk meningkatkan fleksibilitas, testability, dan reusability dari kode.
+
+<b>What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?</b>
+
+Jika kita hanya menggunakan Model dalam aplikasi tanpa memisahkan Model, Service, dan Repository, kompleksitas kode akan meningkat secara signifikan karena Model harus menangani semua aspek dari bisnis, penyimpanan data, dan interaksi dengan model lainnya. Interaksi antara Model akan menjadi sulit untuk dikelola karena setiap Model akan saling tergantung satu sama lain dalam hal fungsionalitas serta data yang diperlukan (Tightly Coupled) dan hal ini dapat meningkatkan potensi munculnya bug.
+
+<b>Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.</b>
+
+Saya telah menggunakan Postman untuk beberapa proyek, termasuk tugas ini. Aplikasi ini berfungsi untuk menguji API endpoint dengan mengirimkan request HTTP sesuai yang kita inginkan dan kita dapat mengecek apakah respon sudah sesuai dengan yang diharapkan. Fitur yang menurut saya cukup membantu untuk proyek kelompok dan proyek Software Engineering kedepannya adalah API Scenario Testing dan Collections dimana fitur tersebut akan membantu saya untuk mengelola serta mengorganisir API endpoints saya.
+
+### Reflection Publisher-3
