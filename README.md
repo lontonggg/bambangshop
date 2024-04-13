@@ -65,11 +65,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
     -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -92,16 +92,28 @@ Pada Rust, penggunaan DashMap mempermudah untuk membuat aplikasi yang thread-saf
 
 ### Reflection Publisher-2
 
-<b>In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?</b>
+<b>1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?</b>
 
 Alasan mengapa Model perlu dipisah dengan Service dan Repository adalah untuk menjaga agar kode tetap terorganisir dan mudah dimaintain. Karena Service dan Repository memiliki responsibility yang berbeda, maka prinsip Single Responsibility Principle (SRP) perlu diterapkan untuk meningkatkan fleksibilitas, testability, dan reusability dari kode.
 
-<b>What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?</b>
+<b>2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?</b>
 
 Jika kita hanya menggunakan Model dalam aplikasi tanpa memisahkan Model, Service, dan Repository, kompleksitas kode akan meningkat secara signifikan karena Model harus menangani semua aspek dari bisnis, penyimpanan data, dan interaksi dengan model lainnya. Interaksi antara Model akan menjadi sulit untuk dikelola karena setiap Model akan saling tergantung satu sama lain dalam hal fungsionalitas serta data yang diperlukan (Tightly Coupled) dan hal ini dapat meningkatkan potensi munculnya bug.
 
-<b>Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.</b>
+<b>3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.</b>
 
 Saya telah menggunakan Postman untuk beberapa proyek, termasuk tugas ini. Aplikasi ini berfungsi untuk menguji API endpoint dengan mengirimkan request HTTP sesuai yang kita inginkan dan kita dapat mengecek apakah respon sudah sesuai dengan yang diharapkan. Fitur yang menurut saya cukup membantu untuk proyek kelompok dan proyek Software Engineering kedepannya adalah API Scenario Testing dan Collections dimana fitur tersebut akan membantu saya untuk mengelola serta mengorganisir API endpoints saya.
 
 ### Reflection Publisher-3
+
+<b>1. Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?</b>
+
+Pada tutorial ini, Observer Pattern yang digunakan adalah Push model. Hal ini terlihat dari bagaimana publisher secara aktif mengirim notifikasi ke subscribers setiap kali ada peristiwa seperti pembuatan produk, penghapusan produk, atau publish produk. Output log menunjukkan bahwa Notification Service memanggil metode notify untuk setiap subscriber, mengirimkan pembaruan kepada mereka. Selain itu, saat ada pembaruan, metode update dalam Model Subscriber mengirimkan payload ke URL subscriber tersebut.
+
+<b>2. What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)</b>
+
+Penerapan Pull Model memberikan keuntungan berupa kebebasan bagi subscriber untuk menentukan kapan mereka ingin menerima notifikasi. Selain itu, pendekatan ini lebih efisien karena notifikasi hanya dikirimkan saat diperlukan. Namun, kekurangannya adalah memerlukan business logic tambahan untuk mengatur proses pengambilan data notifikasi oleh subscriber, serta mungkin terjadi delay dalam pengiriman informasi kepada subscriber karena notifikasi tidak dikirimkan secara aktif oleh publisher.
+
+<b>3. Explain what will happen to the program if we decide to not use multi-threading in the notification process.</b>
+
+Jika program tidak menggunakan multi-threading pada proses notifikasi, maka aplikasi akan berjalan dengan lambat ketika ada banyak subscriber yang perlu dinotify secara bersamaan karena proses notifikasi akan dilakukan secara berurutan, yang dapat menyebabkan delay dalam memberikan notifikasi kepada subscriber. 
